@@ -7,6 +7,7 @@ namespace ProyectoAPI.Entities
 {
     public class Empleado
     {
+        public int ID_EMPLEADO { get; set; }
         public string NOMBRE { get; set; }
         public string APELLIDO1 { get; set; }
         public string APELLIDO2 { get; set; }
@@ -14,6 +15,7 @@ namespace ProyectoAPI.Entities
         public string PASSWORD { get; set; }
         public DateTime FECHA_INGRESO { get; set; }
         public int ID_ROL { get; set; }
+        public string CORREO { get; set; }  
 
 
     }

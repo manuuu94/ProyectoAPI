@@ -41,6 +41,36 @@ namespace ProyectoAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/ConsultarEmpleados")]
+        public List<Empleado> ConsultarEmpleados()
+        {
+            try
+            {
+                return modelo.ConsultarEmpleados();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        
+        [HttpPut]
+        [Route("api/ActualizarEmpleado")]
+        public bool ActualizarEmpleado(Empleado empleado)
+        {
+            try
+            {
+                return modelo.ActualizarEmpleado(empleado);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        
+
 
     }
 }
