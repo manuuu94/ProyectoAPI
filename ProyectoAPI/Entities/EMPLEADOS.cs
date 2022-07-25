@@ -28,6 +28,7 @@ namespace ProyectoAPI.Entities
         public byte[] PASSHASH { get; set; }
         public System.DateTime FECHA_INGRESO { get; set; }
         public int ID_ROL { get; set; }
+        public string CORREO { get; set; }
     
         public virtual SERVICIOS SERVICIOS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

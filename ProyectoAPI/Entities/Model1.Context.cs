@@ -37,7 +37,7 @@ namespace ProyectoAPI.Entities
         public virtual DbSet<ROLES> ROLES { get; set; }
         public virtual DbSet<SERVICIOS> SERVICIOS { get; set; }
     
-        public virtual int añadeEmpleado(string pNOMBRE, string pAPELLIDO1, string pAPELLIDO2, string pUSERNAME, string pPASSWORD, Nullable<System.DateTime> pFECHAINGRESO, Nullable<int> pIDROL)
+        public virtual int añadeEmpleado(string pNOMBRE, string pAPELLIDO1, string pAPELLIDO2, string pUSERNAME, string pPASSWORD, Nullable<System.DateTime> pFECHAINGRESO, string pCORREO, Nullable<int> pIDROL)
         {
             var pNOMBREParameter = pNOMBRE != null ?
                 new ObjectParameter("PNOMBRE", pNOMBRE) :
@@ -63,11 +63,15 @@ namespace ProyectoAPI.Entities
                 new ObjectParameter("PFECHAINGRESO", pFECHAINGRESO) :
                 new ObjectParameter("PFECHAINGRESO", typeof(System.DateTime));
     
+            var pCORREOParameter = pCORREO != null ?
+                new ObjectParameter("PCORREO", pCORREO) :
+                new ObjectParameter("PCORREO", typeof(string));
+    
             var pIDROLParameter = pIDROL.HasValue ?
                 new ObjectParameter("PIDROL", pIDROL) :
                 new ObjectParameter("PIDROL", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("añadeEmpleado", pNOMBREParameter, pAPELLIDO1Parameter, pAPELLIDO2Parameter, pUSERNAMEParameter, pPASSWORDParameter, pFECHAINGRESOParameter, pIDROLParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("añadeEmpleado", pNOMBREParameter, pAPELLIDO1Parameter, pAPELLIDO2Parameter, pUSERNAMEParameter, pPASSWORDParameter, pFECHAINGRESOParameter, pCORREOParameter, pIDROLParameter);
         }
     
         public virtual int añadeRol(string dESCRIPCION, Nullable<int> iDSERVICIO)

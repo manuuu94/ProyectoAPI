@@ -44,6 +44,40 @@ namespace ProyectoAPI.Models
                 }
             }
 
+        public ResPass RecuperarContraseña(ResPass respass)
+        {
+            using (var conexion = new PROYECTO_PAEntities())
+            {
+                try
+                {
+                    var datos = (from x in conexion.EMPLEADOS
+                                 where x.USERNAME == respass.USERNAME
+                                 select x).FirstOrDefault();
+
+                    if (datos != null)
+                    {
+                        respass = new ResPass();
+
+                        respass.USERNAME = datos.USERNAME;
+                        respass.PASSWORD = null;
+                        respass.CORREO = datos.CORREO;
+
+
+                        return respass;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    conexion.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
 
 
 

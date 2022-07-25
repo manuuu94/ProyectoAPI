@@ -17,4 +17,11 @@ namespace ProyectoAPI.Entities
 
 
     }
+
+    public class ResPass
+    {
+        public string USERNAME { get; set; }
+        public string PASSWORD { get; set; }
+        public string CORREO { get; set; }
+    }
 }

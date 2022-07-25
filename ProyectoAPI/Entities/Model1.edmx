@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PROYECTO_PAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PROYECTO_PAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CARRITO">
           <Key>
             <PropertyRef Name="ID_PROD" />
@@ -39,6 +39,7 @@
           <Property Name="USERNAME" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="PASSHASH" Type="binary" MaxLength="150" Nullable="false" />
           <Property Name="FECHA_INGRESO" Type="date" Nullable="false" />
+          <Property Name="CORREO" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="ID_ROL" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="INVENTARIO_SERVICIOS">
@@ -116,7 +117,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CLIENTES___ID_CO__18B6AB08">
+        <Association Name="FK__CLIENTES___ID_CO__345EC57D">
           <End Role="REGISTRO_COMPRAS" Type="Self.REGISTRO_COMPRAS" Multiplicity="1" />
           <End Role="CLIENTES_ATENDIDOS" Type="Self.CLIENTES_ATENDIDOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -128,7 +129,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMPLEADOS__ID_RO__11158940">
+        <Association Name="FK__EMPLEADOS__ID_RO__2EA5EC27">
           <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
           <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -152,7 +153,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__REGISTRO___ID_EM__15DA3E5D">
+        <Association Name="FK__REGISTRO___ID_EM__318258D2">
           <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="1" />
           <End Role="REGISTRO_COMPRAS" Type="Self.REGISTRO_COMPRAS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -195,6 +196,7 @@
           <Parameter Name="PUSERNAME" Type="varchar" Mode="In" />
           <Parameter Name="PPASSWORD" Type="varchar" Mode="In" />
           <Parameter Name="PFECHAINGRESO" Type="date" Mode="In" />
+          <Parameter Name="PCORREO" Type="varchar" Mode="In" />
           <Parameter Name="PIDROL" Type="int" Mode="In" />
         </Function>
         <Function Name="añadeRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -221,11 +223,11 @@
             <End Role="INVENTARIO_SERVICIOS" EntitySet="INVENTARIO_SERVICIOS" />
             <End Role="CARRITO" EntitySet="CARRITO" />
           </AssociationSet>
-          <AssociationSet Name="FK__CLIENTES___ID_CO__18B6AB08" Association="Self.FK__CLIENTES___ID_CO__18B6AB08">
+          <AssociationSet Name="FK__CLIENTES___ID_CO__345EC57D" Association="Self.FK__CLIENTES___ID_CO__345EC57D">
             <End Role="REGISTRO_COMPRAS" EntitySet="REGISTRO_COMPRAS" />
             <End Role="CLIENTES_ATENDIDOS" EntitySet="CLIENTES_ATENDIDOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__EMPLEADOS__ID_RO__11158940" Association="Self.FK__EMPLEADOS__ID_RO__11158940">
+          <AssociationSet Name="FK__EMPLEADOS__ID_RO__2EA5EC27" Association="Self.FK__EMPLEADOS__ID_RO__2EA5EC27">
             <End Role="SERVICIOS" EntitySet="SERVICIOS" />
             <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
           </AssociationSet>
@@ -233,7 +235,7 @@
             <End Role="SERVICIOS" EntitySet="SERVICIOS" />
             <End Role="INVENTARIO_SERVICIOS" EntitySet="INVENTARIO_SERVICIOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__REGISTRO___ID_EM__15DA3E5D" Association="Self.FK__REGISTRO___ID_EM__15DA3E5D">
+          <AssociationSet Name="FK__REGISTRO___ID_EM__318258D2" Association="Self.FK__REGISTRO___ID_EM__318258D2">
             <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
             <End Role="REGISTRO_COMPRAS" EntitySet="REGISTRO_COMPRAS" />
           </AssociationSet>
@@ -246,8 +248,7 @@
             <End Role="ROLES" EntitySet="ROLES" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PROYECTO_PAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -290,6 +291,7 @@
           <Property Name="ID_ROL" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SERVICIOS" Relationship="Self.FK__EMPLEADOS__ID_RO__11158940" FromRole="EMPLEADOS" ToRole="SERVICIOS" />
           <NavigationProperty Name="REGISTRO_COMPRAS" Relationship="Self.FK__REGISTRO___ID_EM__15DA3E5D" FromRole="EMPLEADOS" ToRole="REGISTRO_COMPRAS" />
+          <Property Name="CORREO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="INVENTARIO_SERVICIOS">
           <Key>
@@ -493,6 +495,7 @@
             <Parameter Name="PUSERNAME" Mode="In" Type="String" />
             <Parameter Name="PPASSWORD" Mode="In" Type="String" />
             <Parameter Name="PFECHAINGRESO" Mode="In" Type="DateTime" />
+            <Parameter Name="PCORREO" Mode="In" Type="String" />
             <Parameter Name="PIDROL" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="añadeRol">
@@ -550,6 +553,7 @@
           <EntitySetMapping Name="EMPLEADOS">
             <EntityTypeMapping TypeName="PROYECTO_PAModel.EMPLEADOS">
               <MappingFragment StoreEntitySet="EMPLEADOS">
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
                 <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />

@@ -27,6 +27,20 @@ namespace ProyectoAPI.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("api/RecuperarContraseña")]
+        public ResPass RecuperarContraseña(ResPass respass)
+        {
+            try
+            {
+                return modelo.RecuperarContraseña(respass);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
 
     }
 }
