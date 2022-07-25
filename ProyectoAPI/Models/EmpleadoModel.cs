@@ -27,6 +27,7 @@ namespace ProyectoAPI.Models
                             empleado.ID_ROL = datos.ID_ROL;
                             empleado.NOMBRE = datos.NOMBRE;
                             empleado.PASSWORD = null;
+                            empleado.APELLIDO1 = datos.APELLIDO1;
 
                         return empleado;
                         }
