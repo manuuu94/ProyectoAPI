@@ -1,0 +1,674 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PROYECTO_PAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CARRITO">
+          <Key>
+            <PropertyRef Name="ID_PROD" />
+          </Key>
+          <Property Name="ID_PROD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PRECIO" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CANTIDAD" Type="int" Nullable="false" />
+          <Property Name="TOTAL" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTES_ATENDIDOS">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CEDULA_CLIENTE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="varchar" MaxLength="50" />
+          <Property Name="CORREO" Type="varchar" MaxLength="100" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="100" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="ID_COMPRA" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADOS">
+          <Key>
+            <PropertyRef Name="ID_EMPLEADO" />
+          </Key>
+          <Property Name="ID_EMPLEADO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDO1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDO2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PASSHASH" Type="binary" MaxLength="150" Nullable="false" />
+          <Property Name="FECHA_INGRESO" Type="date" Nullable="false" />
+          <Property Name="ID_ROL" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INVENTARIO_SERVICIOS">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO" />
+          </Key>
+          <Property Name="ID_PRODUCTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PRECIO" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="CANTIDAD_DISPONIBLE" Type="int" Nullable="false" />
+          <Property Name="URL_IMAGE" Type="varchar" MaxLength="100" />
+          <Property Name="ID_SERVICIO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REGISTRO_COMPRAS">
+          <Key>
+            <PropertyRef Name="ID_COMPRA" />
+          </Key>
+          <Property Name="ID_COMPRA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CEDULA_CLIENTE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="varchar" MaxLength="50" />
+          <Property Name="CORREO" Type="varchar" MaxLength="100" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="100" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="TOTAL_COMPRA" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ID_EMPLEADO" Type="int" Nullable="false" />
+          <Property Name="NOMBRE_EMPLEADO" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="REGISTROS_CARRITO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACCION" Type="varchar" MaxLength="100" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PRECIO" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CANTIDAD" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="ID_PROD" Type="int" />
+        </EntityType>
+        <EntityType Name="REGISTROS_INVENTARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACCION" Type="varchar" MaxLength="100" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="ID_SERVICIO" Type="int" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_SERVICIO" Type="int" />
+        </EntityType>
+        <EntityType Name="SERVICIOS">
+          <Key>
+            <PropertyRef Name="ID_SERVICIO" />
+          </Key>
+          <Property Name="ID_SERVICIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_SERVICIO" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CARRITO__ID_PROD__4E53A1AA">
+          <End Role="INVENTARIO_SERVICIOS" Type="Self.INVENTARIO_SERVICIOS" Multiplicity="1" />
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVENTARIO_SERVICIOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="CARRITO">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CLIENTES___ID_CO__18B6AB08">
+          <End Role="REGISTRO_COMPRAS" Type="Self.REGISTRO_COMPRAS" Multiplicity="1" />
+          <End Role="CLIENTES_ATENDIDOS" Type="Self.CLIENTES_ATENDIDOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGISTRO_COMPRAS">
+              <PropertyRef Name="ID_COMPRA" />
+            </Principal>
+            <Dependent Role="CLIENTES_ATENDIDOS">
+              <PropertyRef Name="ID_COMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADOS__ID_RO__11158940">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Principal>
+            <Dependent Role="EMPLEADOS">
+              <PropertyRef Name="ID_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTARI__ID_SE__4E88ABD4">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
+          <End Role="INVENTARIO_SERVICIOS" Type="Self.INVENTARIO_SERVICIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Principal>
+            <Dependent Role="INVENTARIO_SERVICIOS">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REGISTRO___ID_EM__15DA3E5D">
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="1" />
+          <End Role="REGISTRO_COMPRAS" Type="Self.REGISTRO_COMPRAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADOS">
+              <PropertyRef Name="ID_EMPLEADO" />
+            </Principal>
+            <Dependent Role="REGISTRO_COMPRAS">
+              <PropertyRef Name="ID_EMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REGISTROS__ID_SE__367C1819">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="0..1" />
+          <End Role="REGISTROS_INVENTARIO" Type="Self.REGISTROS_INVENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Principal>
+            <Dependent Role="REGISTROS_INVENTARIO">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ROLES__ID_SERVIC__0B5CAFEA">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="0..1" />
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Principal>
+            <Dependent Role="ROLES">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="añadeEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PNOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="PAPELLIDO1" Type="varchar" Mode="In" />
+          <Parameter Name="PAPELLIDO2" Type="varchar" Mode="In" />
+          <Parameter Name="PUSERNAME" Type="varchar" Mode="In" />
+          <Parameter Name="PPASSWORD" Type="varchar" Mode="In" />
+          <Parameter Name="PFECHAINGRESO" Type="date" Mode="In" />
+          <Parameter Name="PIDROL" Type="int" Mode="In" />
+        </Function>
+        <Function Name="añadeRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DESCRIPCION" Type="varchar" Mode="In" />
+          <Parameter Name="IDSERVICIO" Type="int" Mode="In" />
+        </Function>
+        <Function Name="vaciarCarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="vaciarInventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="validarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PUSERNAME" Type="varchar" Mode="In" />
+          <Parameter Name="PPASSWORD" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="PROYECTO_PAModelStoreContainer">
+          <EntitySet Name="CARRITO" EntityType="Self.CARRITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTES_ATENDIDOS" EntityType="Self.CLIENTES_ATENDIDOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVENTARIO_SERVICIOS" EntityType="Self.INVENTARIO_SERVICIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REGISTRO_COMPRAS" EntityType="Self.REGISTRO_COMPRAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REGISTROS_CARRITO" EntityType="Self.REGISTROS_CARRITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REGISTROS_INVENTARIO" EntityType="Self.REGISTROS_INVENTARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICIOS" EntityType="Self.SERVICIOS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CARRITO__ID_PROD__4E53A1AA" Association="Self.FK__CARRITO__ID_PROD__4E53A1AA">
+            <End Role="INVENTARIO_SERVICIOS" EntitySet="INVENTARIO_SERVICIOS" />
+            <End Role="CARRITO" EntitySet="CARRITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CLIENTES___ID_CO__18B6AB08" Association="Self.FK__CLIENTES___ID_CO__18B6AB08">
+            <End Role="REGISTRO_COMPRAS" EntitySet="REGISTRO_COMPRAS" />
+            <End Role="CLIENTES_ATENDIDOS" EntitySet="CLIENTES_ATENDIDOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADOS__ID_RO__11158940" Association="Self.FK__EMPLEADOS__ID_RO__11158940">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTARI__ID_SE__4E88ABD4" Association="Self.FK__INVENTARI__ID_SE__4E88ABD4">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="INVENTARIO_SERVICIOS" EntitySet="INVENTARIO_SERVICIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REGISTRO___ID_EM__15DA3E5D" Association="Self.FK__REGISTRO___ID_EM__15DA3E5D">
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+            <End Role="REGISTRO_COMPRAS" EntitySet="REGISTRO_COMPRAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REGISTROS__ID_SE__367C1819" Association="Self.FK__REGISTROS__ID_SE__367C1819">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="REGISTROS_INVENTARIO" EntitySet="REGISTROS_INVENTARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ROLES__ID_SERVIC__0B5CAFEA" Association="Self.FK__ROLES__ID_SERVIC__0B5CAFEA">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="ROLES" EntitySet="ROLES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PROYECTO_PAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CARRITO">
+          <Key>
+            <PropertyRef Name="ID_PROD" />
+          </Key>
+          <Property Name="ID_PROD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+          <Property Name="TOTAL" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="INVENTARIO_SERVICIOS" Relationship="Self.FK__CARRITO__ID_PROD__4E53A1AA" FromRole="CARRITO" ToRole="INVENTARIO_SERVICIOS" />
+        </EntityType>
+        <EntityType Name="CLIENTES_ATENDIDOS">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CEDULA_CLIENTE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="ID_COMPRA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="REGISTRO_COMPRAS" Relationship="Self.FK__CLIENTES___ID_CO__18B6AB08" FromRole="CLIENTES_ATENDIDOS" ToRole="REGISTRO_COMPRAS" />
+        </EntityType>
+        <EntityType Name="EMPLEADOS">
+          <Key>
+            <PropertyRef Name="ID_EMPLEADO" />
+          </Key>
+          <Property Name="ID_EMPLEADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDO1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDO2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSHASH" Type="Binary" MaxLength="150" FixedLength="true" Nullable="false" />
+          <Property Name="FECHA_INGRESO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID_ROL" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SERVICIOS" Relationship="Self.FK__EMPLEADOS__ID_RO__11158940" FromRole="EMPLEADOS" ToRole="SERVICIOS" />
+          <NavigationProperty Name="REGISTRO_COMPRAS" Relationship="Self.FK__REGISTRO___ID_EM__15DA3E5D" FromRole="EMPLEADOS" ToRole="REGISTRO_COMPRAS" />
+        </EntityType>
+        <EntityType Name="INVENTARIO_SERVICIOS">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO" />
+          </Key>
+          <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="CANTIDAD_DISPONIBLE" Type="Int32" Nullable="false" />
+          <Property Name="URL_IMAGE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID_SERVICIO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CARRITO" Relationship="Self.FK__CARRITO__ID_PROD__4E53A1AA" FromRole="INVENTARIO_SERVICIOS" ToRole="CARRITO" />
+          <NavigationProperty Name="SERVICIOS" Relationship="Self.FK__INVENTARI__ID_SE__4E88ABD4" FromRole="INVENTARIO_SERVICIOS" ToRole="SERVICIOS" />
+        </EntityType>
+        <EntityType Name="REGISTRO_COMPRAS">
+          <Key>
+            <PropertyRef Name="ID_COMPRA" />
+          </Key>
+          <Property Name="ID_COMPRA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CEDULA_CLIENTE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="TOTAL_COMPRA" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ID_EMPLEADO" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE_EMPLEADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTES_ATENDIDOS" Relationship="Self.FK__CLIENTES___ID_CO__18B6AB08" FromRole="REGISTRO_COMPRAS" ToRole="CLIENTES_ATENDIDOS" />
+          <NavigationProperty Name="EMPLEADOS" Relationship="Self.FK__REGISTRO___ID_EM__15DA3E5D" FromRole="REGISTRO_COMPRAS" ToRole="EMPLEADOS" />
+        </EntityType>
+        <EntityType Name="REGISTROS_CARRITO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="ID_PROD" Type="Int32" />
+        </EntityType>
+        <EntityType Name="REGISTROS_INVENTARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="ID_SERVICIO" Type="Int32" />
+          <NavigationProperty Name="SERVICIOS" Relationship="Self.FK__REGISTROS__ID_SE__367C1819" FromRole="REGISTROS_INVENTARIO" ToRole="SERVICIOS" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_SERVICIO" Type="Int32" />
+          <NavigationProperty Name="SERVICIOS" Relationship="Self.FK__ROLES__ID_SERVIC__0B5CAFEA" FromRole="ROLES" ToRole="SERVICIOS" />
+        </EntityType>
+        <EntityType Name="SERVICIOS">
+          <Key>
+            <PropertyRef Name="ID_SERVICIO" />
+          </Key>
+          <Property Name="ID_SERVICIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_SERVICIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EMPLEADOS" Relationship="Self.FK__EMPLEADOS__ID_RO__11158940" FromRole="SERVICIOS" ToRole="EMPLEADOS" />
+          <NavigationProperty Name="INVENTARIO_SERVICIOS" Relationship="Self.FK__INVENTARI__ID_SE__4E88ABD4" FromRole="SERVICIOS" ToRole="INVENTARIO_SERVICIOS" />
+          <NavigationProperty Name="REGISTROS_INVENTARIO" Relationship="Self.FK__REGISTROS__ID_SE__367C1819" FromRole="SERVICIOS" ToRole="REGISTROS_INVENTARIO" />
+          <NavigationProperty Name="ROLES" Relationship="Self.FK__ROLES__ID_SERVIC__0B5CAFEA" FromRole="SERVICIOS" ToRole="ROLES" />
+        </EntityType>
+        <Association Name="FK__CARRITO__ID_PROD__4E53A1AA">
+          <End Role="INVENTARIO_SERVICIOS" Type="Self.INVENTARIO_SERVICIOS" Multiplicity="1" />
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVENTARIO_SERVICIOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="CARRITO">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CLIENTES___ID_CO__18B6AB08">
+          <End Role="REGISTRO_COMPRAS" Type="Self.REGISTRO_COMPRAS" Multiplicity="1" />
+          <End Role="CLIENTES_ATENDIDOS" Type="Self.CLIENTES_ATENDIDOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGISTRO_COMPRAS">
+              <PropertyRef Name="ID_COMPRA" />
+            </Principal>
+            <Dependent Role="CLIENTES_ATENDIDOS">
+              <PropertyRef Name="ID_COMPRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLEADOS__ID_RO__11158940">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Principal>
+            <Dependent Role="EMPLEADOS">
+              <PropertyRef Name="ID_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REGISTRO___ID_EM__15DA3E5D">
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="1" />
+          <End Role="REGISTRO_COMPRAS" Type="Self.REGISTRO_COMPRAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADOS">
+              <PropertyRef Name="ID_EMPLEADO" />
+            </Principal>
+            <Dependent Role="REGISTRO_COMPRAS">
+              <PropertyRef Name="ID_EMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTARI__ID_SE__4E88ABD4">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
+          <End Role="INVENTARIO_SERVICIOS" Type="Self.INVENTARIO_SERVICIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Principal>
+            <Dependent Role="INVENTARIO_SERVICIOS">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REGISTROS__ID_SE__367C1819">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="0..1" />
+          <End Role="REGISTROS_INVENTARIO" Type="Self.REGISTROS_INVENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Principal>
+            <Dependent Role="REGISTROS_INVENTARIO">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ROLES__ID_SERVIC__0B5CAFEA">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="0..1" />
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Principal>
+            <Dependent Role="ROLES">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PROYECTO_PAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CARRITO" EntityType="Self.CARRITO" />
+          <EntitySet Name="CLIENTES_ATENDIDOS" EntityType="Self.CLIENTES_ATENDIDOS" />
+          <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" />
+          <EntitySet Name="INVENTARIO_SERVICIOS" EntityType="Self.INVENTARIO_SERVICIOS" />
+          <EntitySet Name="REGISTRO_COMPRAS" EntityType="Self.REGISTRO_COMPRAS" />
+          <EntitySet Name="REGISTROS_CARRITO" EntityType="Self.REGISTROS_CARRITO" />
+          <EntitySet Name="REGISTROS_INVENTARIO" EntityType="Self.REGISTROS_INVENTARIO" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" />
+          <EntitySet Name="SERVICIOS" EntityType="Self.SERVICIOS" />
+          <AssociationSet Name="FK__CARRITO__ID_PROD__4E53A1AA" Association="Self.FK__CARRITO__ID_PROD__4E53A1AA">
+            <End Role="INVENTARIO_SERVICIOS" EntitySet="INVENTARIO_SERVICIOS" />
+            <End Role="CARRITO" EntitySet="CARRITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CLIENTES___ID_CO__18B6AB08" Association="Self.FK__CLIENTES___ID_CO__18B6AB08">
+            <End Role="REGISTRO_COMPRAS" EntitySet="REGISTRO_COMPRAS" />
+            <End Role="CLIENTES_ATENDIDOS" EntitySet="CLIENTES_ATENDIDOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLEADOS__ID_RO__11158940" Association="Self.FK__EMPLEADOS__ID_RO__11158940">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REGISTRO___ID_EM__15DA3E5D" Association="Self.FK__REGISTRO___ID_EM__15DA3E5D">
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+            <End Role="REGISTRO_COMPRAS" EntitySet="REGISTRO_COMPRAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTARI__ID_SE__4E88ABD4" Association="Self.FK__INVENTARI__ID_SE__4E88ABD4">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="INVENTARIO_SERVICIOS" EntitySet="INVENTARIO_SERVICIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REGISTROS__ID_SE__367C1819" Association="Self.FK__REGISTROS__ID_SE__367C1819">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="REGISTROS_INVENTARIO" EntitySet="REGISTROS_INVENTARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ROLES__ID_SERVIC__0B5CAFEA" Association="Self.FK__ROLES__ID_SERVIC__0B5CAFEA">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="ROLES" EntitySet="ROLES" />
+          </AssociationSet>
+          <FunctionImport Name="añadeEmpleado">
+            <Parameter Name="PNOMBRE" Mode="In" Type="String" />
+            <Parameter Name="PAPELLIDO1" Mode="In" Type="String" />
+            <Parameter Name="PAPELLIDO2" Mode="In" Type="String" />
+            <Parameter Name="PUSERNAME" Mode="In" Type="String" />
+            <Parameter Name="PPASSWORD" Mode="In" Type="String" />
+            <Parameter Name="PFECHAINGRESO" Mode="In" Type="DateTime" />
+            <Parameter Name="PIDROL" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="añadeRol">
+            <Parameter Name="DESCRIPCION" Mode="In" Type="String" />
+            <Parameter Name="IDSERVICIO" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="vaciarCarrito" />
+          <FunctionImport Name="vaciarInventario" />
+          <FunctionImport Name="validarUsuario" ReturnType="Collection(PROYECTO_PAModel.validarUsuario_Result)">
+            <Parameter Name="PUSERNAME" Mode="In" Type="String" />
+            <Parameter Name="PPASSWORD" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="validarUsuario_Result">
+          <Property Type="Int32" Name="ID_EMPLEADO" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="APELLIDO1" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="APELLIDO2" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="100" />
+          <Property Type="Binary" Name="PASSHASH" Nullable="false" MaxLength="150" />
+          <Property Type="DateTime" Name="FECHA_INGRESO" Nullable="false" />
+          <Property Type="Int32" Name="ID_ROL" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PROYECTO_PAModelStoreContainer" CdmEntityContainer="PROYECTO_PAEntities">
+          <EntitySetMapping Name="CARRITO">
+            <EntityTypeMapping TypeName="PROYECTO_PAModel.CARRITO">
+              <MappingFragment StoreEntitySet="CARRITO">
+                <ScalarProperty Name="ID_PROD" ColumnName="ID_PROD" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTES_ATENDIDOS">
+            <EntityTypeMapping TypeName="PROYECTO_PAModel.CLIENTES_ATENDIDOS">
+              <MappingFragment StoreEntitySet="CLIENTES_ATENDIDOS">
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="CEDULA_CLIENTE" ColumnName="CEDULA_CLIENTE" />
+                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_COMPRA" ColumnName="ID_COMPRA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADOS">
+            <EntityTypeMapping TypeName="PROYECTO_PAModel.EMPLEADOS">
+              <MappingFragment StoreEntitySet="EMPLEADOS">
+                <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
+                <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSHASH" ColumnName="PASSHASH" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVENTARIO_SERVICIOS">
+            <EntityTypeMapping TypeName="PROYECTO_PAModel.INVENTARIO_SERVICIOS">
+              <MappingFragment StoreEntitySet="INVENTARIO_SERVICIOS">
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="CANTIDAD_DISPONIBLE" ColumnName="CANTIDAD_DISPONIBLE" />
+                <ScalarProperty Name="URL_IMAGE" ColumnName="URL_IMAGE" />
+                <ScalarProperty Name="ID_SERVICIO" ColumnName="ID_SERVICIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGISTRO_COMPRAS">
+            <EntityTypeMapping TypeName="PROYECTO_PAModel.REGISTRO_COMPRAS">
+              <MappingFragment StoreEntitySet="REGISTRO_COMPRAS">
+                <ScalarProperty Name="ID_COMPRA" ColumnName="ID_COMPRA" />
+                <ScalarProperty Name="CEDULA_CLIENTE" ColumnName="CEDULA_CLIENTE" />
+                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="TOTAL_COMPRA" ColumnName="TOTAL_COMPRA" />
+                <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
+                <ScalarProperty Name="NOMBRE_EMPLEADO" ColumnName="NOMBRE_EMPLEADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGISTROS_CARRITO">
+            <EntityTypeMapping TypeName="PROYECTO_PAModel.REGISTROS_CARRITO">
+              <MappingFragment StoreEntitySet="REGISTROS_CARRITO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ACCION" ColumnName="ACCION" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_PROD" ColumnName="ID_PROD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGISTROS_INVENTARIO">
+            <EntityTypeMapping TypeName="PROYECTO_PAModel.REGISTROS_INVENTARIO">
+              <MappingFragment StoreEntitySet="REGISTROS_INVENTARIO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ACCION" ColumnName="ACCION" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_SERVICIO" ColumnName="ID_SERVICIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLES">
+            <EntityTypeMapping TypeName="PROYECTO_PAModel.ROLES">
+              <MappingFragment StoreEntitySet="ROLES">
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_SERVICIO" ColumnName="ID_SERVICIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICIOS">
+            <EntityTypeMapping TypeName="PROYECTO_PAModel.SERVICIOS">
+              <MappingFragment StoreEntitySet="SERVICIOS">
+                <ScalarProperty Name="ID_SERVICIO" ColumnName="ID_SERVICIO" />
+                <ScalarProperty Name="NOMBRE_SERVICIO" ColumnName="NOMBRE_SERVICIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="añadeEmpleado" FunctionName="PROYECTO_PAModel.Store.añadeEmpleado" />
+          <FunctionImportMapping FunctionImportName="añadeRol" FunctionName="PROYECTO_PAModel.Store.añadeRol" />
+          <FunctionImportMapping FunctionImportName="vaciarCarrito" FunctionName="PROYECTO_PAModel.Store.vaciarCarrito" />
+          <FunctionImportMapping FunctionImportName="vaciarInventario" FunctionName="PROYECTO_PAModel.Store.vaciarInventario" />
+          <FunctionImportMapping FunctionImportName="validarUsuario" FunctionName="PROYECTO_PAModel.Store.validarUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PROYECTO_PAModel.validarUsuario_Result">
+                <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
+                <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSHASH" ColumnName="PASSHASH" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
