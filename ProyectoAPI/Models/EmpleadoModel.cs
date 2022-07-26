@@ -81,6 +81,27 @@ namespace ProyectoAPI.Models
                 }
             }
         }
+
+        public bool CambiarContraseña(ResPass resPass)
+        {
+            using (var conexion = new PROYECTO_PAEntities())
+            {
+                try
+                {
+                    conexion.cambiarContraseña(resPass.USERNAME, resPass.PASSWORD);
+                    conexion.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    conexion.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
+
+
         public Empleado ValidarUsuario(Empleado empleado)
             {
                 using (var conexion = new PROYECTO_PAEntities())

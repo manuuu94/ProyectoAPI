@@ -203,6 +203,10 @@
           <Parameter Name="DESCRIPCION" Type="varchar" Mode="In" />
           <Parameter Name="IDSERVICIO" Type="int" Mode="In" />
         </Function>
+        <Function Name="cambiarContraseña" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PUSERNAME" Type="varchar" Mode="In" />
+          <Parameter Name="PPASSWORD" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="vaciarCarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="vaciarInventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="validarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -508,6 +512,10 @@
             <Parameter Name="PUSERNAME" Mode="In" Type="String" />
             <Parameter Name="PPASSWORD" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="cambiarContraseña">
+            <Parameter Name="PUSERNAME" Mode="In" Type="String" />
+            <Parameter Name="PPASSWORD" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="validarUsuario_Result">
           <Property Type="Int32" Name="ID_EMPLEADO" Nullable="false" />
@@ -652,6 +660,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="cambiarContraseña" FunctionName="PROYECTO_PAModel.Store.cambiarContraseña" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

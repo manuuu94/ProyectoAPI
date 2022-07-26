@@ -109,5 +109,18 @@ namespace ProyectoAPI.Entities
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<validarUsuario_Result>("validarUsuario", pUSERNAMEParameter, pPASSWORDParameter);
         }
+    
+        public virtual int cambiarContraseña(string pUSERNAME, string pPASSWORD)
+        {
+            var pUSERNAMEParameter = pUSERNAME != null ?
+                new ObjectParameter("PUSERNAME", pUSERNAME) :
+                new ObjectParameter("PUSERNAME", typeof(string));
+    
+            var pPASSWORDParameter = pPASSWORD != null ?
+                new ObjectParameter("PPASSWORD", pPASSWORD) :
+                new ObjectParameter("PPASSWORD", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("cambiarContraseña", pUSERNAMEParameter, pPASSWORDParameter);
+        }
     }
 }

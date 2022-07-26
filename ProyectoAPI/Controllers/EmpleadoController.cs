@@ -69,7 +69,20 @@ namespace ProyectoAPI.Controllers
                 return false;
             }
         }
-        
+
+        [HttpPut]
+        [Route("api/CambiarContraseña")]
+        public bool CambiarContraseña(ResPass resPass)
+        {
+            try
+            {
+                return modelo.CambiarContraseña(resPass);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
 
     }
