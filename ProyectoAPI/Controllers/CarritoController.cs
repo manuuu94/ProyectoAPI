@@ -26,7 +26,20 @@ namespace ProyectoAPI.Controllers
                 return null;
             }
         }
-
+ 
+        [HttpGet]
+        [Route("api/AñadirCarrito2")]
+        public bool AñadirCarrito2(string descripcion, decimal precio, int cantidad, int id_producto)
+        {
+            try
+            {
+                return modelo.AñadirCarrito2(descripcion, precio, cantidad, id_producto);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         [HttpGet]
         [Route("api/mostrarCarrito")]
         public List<carro> mostrarCarrito()

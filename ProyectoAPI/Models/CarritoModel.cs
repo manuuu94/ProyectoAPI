@@ -39,8 +39,6 @@ namespace ProyectoAPI.Models
                         conexion.SaveChanges();
                         
                         return "Producto añadido";
-
-
                     }
                     else
                     {
@@ -51,7 +49,43 @@ namespace ProyectoAPI.Models
                 {
                     conexion.Dispose();
                     throw ex;
+                }
+            }
+        }
+        public bool AñadirCarrito2(string descripcion, decimal precio, int cantidad, int id_producto)
+        {
+            using (var conexion = new PROYECTO_PAEntities())
+            {
+                try
+                {
+                    var datos = (from x in conexion.INVENTARIO_SERVICIOS
+                                 where x.ID_PRODUCTO == id_producto
+                                 select x).FirstOrDefault();
+                    if (datos.CANTIDAD_DISPONIBLE >= cantidad && datos != null &&
+                        datos.CANTIDAD_DISPONIBLE != 0 && cantidad > 0)
+                    {
+                        datos.CANTIDAD_DISPONIBLE = datos.CANTIDAD_DISPONIBLE - cantidad;
 
+                        CARRITO carro = new CARRITO();
+                        carro.DESCRIPCION = datos.DESCRIPCION;
+                        carro.PRECIO = datos.PRECIO;
+                        carro.CANTIDAD = cantidad;
+                        carro.TOTAL = carro.PRECIO * carro.CANTIDAD;
+                        carro.ID_PRODUCTO = datos.ID_PRODUCTO;
+                        conexion.CARRITO.Add(carro);
+                        conexion.SaveChanges();
+
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    conexion.Dispose();
+                    throw ex;
                 }
             }
         }
