@@ -15,7 +15,8 @@ namespace ProyectoAPI.Models
  * No permite añadir productos que no tienen cantidad disponible suficiente en el inventario.
  * 
  */
-        public string AñadirCarrito(carro carrito)
+
+ /*       public string AñadirCarrito(carro carrito)
         {
             using (var conexion = new PROYECTO_PAEntities())
             {
@@ -51,7 +52,7 @@ namespace ProyectoAPI.Models
                     throw ex;
                 }
             }
-        }
+        } */
         public bool AñadirCarrito2(string descripcion, decimal precio, int cantidad, int id_producto)
         {
             using (var conexion = new PROYECTO_PAEntities())
