@@ -15,7 +15,7 @@ namespace ProyectoAPI.Controllers
 
         [HttpPost]
         [Route("api/AñadirCarrito")]
-        public bool AñadirCarrito(carro carrito)
+        public carro AñadirCarrito(carro carrito)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace ProyectoAPI.Controllers
             }
             catch (Exception)
             {
-                return false;
+                return null;
             }
         }
 

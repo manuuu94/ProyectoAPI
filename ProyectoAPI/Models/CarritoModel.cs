@@ -16,7 +16,7 @@ namespace ProyectoAPI.Models
          * 
          */
 
-        public bool AñadirCarrito(carro carrito)
+        public carro AñadirCarrito(carro carrito)
         {
             using (var conexion = new PROYECTO_PAEntities())
             {
@@ -39,11 +39,11 @@ namespace ProyectoAPI.Models
                         conexion.CARRITO.Add(carro);
                         conexion.SaveChanges();
 
-                        return true;
+                        return carrito;
                     }
                     else
                     {
-                        return false;
+                        return null;
                     }
                 }
                 catch (Exception ex)
