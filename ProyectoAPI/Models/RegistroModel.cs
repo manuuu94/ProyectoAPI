@@ -34,8 +34,8 @@ namespace ProyectoAPI.Models
                                                  where x.CEDULA_CLIENTE == registros.CEDULA_CLIENTE
                                                  select x).ToList();
 
-                            if (datosclientes.Count == 0 && registros.NOMBRE_CLIENTE != null & registros.CORREO != null
-                                    && registros.TELEFONO != null)
+                            if (datosclientes.Count == 0 && registros.NOMBRE_CLIENTE != null && registros.CORREO != null
+                                    && registros.TELEFONO != null && (registros.ID_METODO == 1 || registros.ID_METODO ==2))
                             {
                                 var datos = (from x in conexion.CARRITO
                                              select x).ToList();
@@ -53,6 +53,7 @@ namespace ProyectoAPI.Models
                                     registro.TELEFONO = registros.TELEFONO;
                                     registro.FECHA = DateTime.Now;
                                     registro.TOTAL_COMPRA = TOTAL_COMPRA;
+                                    registro.ID_METODO = registros.ID_METODO;
                                     registro.ID_EMPLEADO = registros.ID_EMPLEADO;
                                     registro.NOMBRE_EMPLEADO = registros.NOMBRE_EMPLEADO;
                                     conexion.REGISTRO_COMPRAS.Add(registro);
@@ -70,7 +71,7 @@ namespace ProyectoAPI.Models
                                 }
                             }
 
-                            if (datosclientes.Count > 0)
+                            if (datosclientes.Count > 0 && (registros.ID_METODO == 1 || registros.ID_METODO == 2))
                             {
                                 var datos = (from x in conexion.CARRITO
                                              select x).ToList();
@@ -88,6 +89,7 @@ namespace ProyectoAPI.Models
                                     registro.TELEFONO = registros.TELEFONO;
                                     registro.FECHA = DateTime.Now;
                                     registro.TOTAL_COMPRA = TOTAL_COMPRA;
+                                    registro.ID_METODO = registros.ID_METODO;
                                     registro.ID_EMPLEADO = registros.ID_EMPLEADO;
                                     registro.NOMBRE_EMPLEADO = registros.NOMBRE_EMPLEADO;
                                     conexion.REGISTRO_COMPRAS.Add(registro);
@@ -106,9 +108,10 @@ namespace ProyectoAPI.Models
                             }
 
                             if (datosclientes.Count == 0 && registros.NOMBRE_CLIENTE == null || registros.CORREO == null
-                                || registros.TELEFONO == null)
+                                || registros.TELEFONO == null || registros.ID_METODO != 1 || registros.ID_METODO != 2)
                             {
-                                return "Complete Nombre, Correo y Teléfono del cliente para confirmar la compra";
+                                return "Complete Nombre, Correo, " +
+                                    "Teléfono del cliente y un Método de pago, para confirmar la compra";
                             }
                             else
                             {
@@ -153,6 +156,7 @@ namespace ProyectoAPI.Models
                         TELEFONO = dato.TELEFONO,
                         FECHA = (DateTime)dato.FECHA,
                         TOTAL_COMPRA = (decimal)dato.TOTAL_COMPRA,
+                        ID_METODO = (int)dato.ID_METODO,
                         ID_EMPLEADO = dato.ID_EMPLEADO,
                         NOMBRE_EMPLEADO = dato.NOMBRE_EMPLEADO
                     });

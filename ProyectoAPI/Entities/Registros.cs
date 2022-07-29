@@ -14,6 +14,7 @@ namespace ProyectoAPI.Entities
         public string TELEFONO { get; set; }
         public DateTime FECHA { get; set; }
         public decimal TOTAL_COMPRA { get; set; }
+        public int ID_METODO { get; set; }
         public int ID_EMPLEADO { get; set; }    
         public string NOMBRE_EMPLEADO { get; set; }
 
