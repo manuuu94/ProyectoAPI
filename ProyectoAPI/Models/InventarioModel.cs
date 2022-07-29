@@ -151,7 +151,7 @@ namespace ProyectoAPI.Models
                     }
                     else
                     {
-                        throw new Exception("No existe");
+                        return false;
                     }
                 }
                 catch (Exception ex)
