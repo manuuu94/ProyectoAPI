@@ -8,26 +8,26 @@ namespace ProyectoAPI.Models
 {
     public class CarritoModel
     {
-/* Permite añadir al carrito, mostrar el carrito, eliminar un solo producto del carrito
- * o vaciar completamente el carrito. 
- * Cuando añade o elimina del carrito, siempre se va a actualizar automáticamente 
- * la cantidad disponible en el inventario. 
- * No permite añadir productos que no tienen cantidad disponible suficiente en el inventario.
- * 
- */
+        /* Permite añadir al carrito, mostrar el carrito, eliminar un solo producto del carrito
+         * o vaciar completamente el carrito. 
+         * Cuando añade o elimina del carrito, siempre se va a actualizar automáticamente 
+         * la cantidad disponible en el inventario. 
+         * No permite añadir productos que no tienen cantidad disponible suficiente en el inventario.
+         * 
+         */
 
- /*       public string AñadirCarrito(carro carrito)
+        public bool AñadirCarrito(carro carrito)
         {
             using (var conexion = new PROYECTO_PAEntities())
             {
                 try
-                {                    
-                    var datos = (from x in conexion.INVENTARIO_SERVICIOS
-                                   where x.ID_PRODUCTO == carrito.ID_PROD
-                                   select x).FirstOrDefault();
-                    if (datos.CANTIDAD_DISPONIBLE >= carrito.CANTIDAD && datos != null && 
-                        datos.CANTIDAD_DISPONIBLE != 0 && carrito.CANTIDAD > 0)
                 {
+                    var datos = (from x in conexion.INVENTARIO_SERVICIOS
+                                 where x.ID_PRODUCTO == carrito.ID
+                                 select x).FirstOrDefault();
+                    if (datos.CANTIDAD_DISPONIBLE >= carrito.CANTIDAD && datos != null &&
+                        datos.CANTIDAD_DISPONIBLE != 0 && carrito.CANTIDAD > 0)
+                    {
                         datos.CANTIDAD_DISPONIBLE = datos.CANTIDAD_DISPONIBLE - carrito.CANTIDAD;
 
                         CARRITO carro = new CARRITO();
@@ -38,12 +38,12 @@ namespace ProyectoAPI.Models
                         carro.ID_PRODUCTO = datos.ID_PRODUCTO;
                         conexion.CARRITO.Add(carro);
                         conexion.SaveChanges();
-                        
-                        return "Producto añadido";
+
+                        return true;
                     }
                     else
                     {
-                        return "Error";
+                        return false;
                     }
                 }
                 catch (Exception ex)
@@ -52,7 +52,7 @@ namespace ProyectoAPI.Models
                     throw ex;
                 }
             }
-        } */
+        }
         public bool AñadirCarrito2(string descripcion, decimal precio, int cantidad, int id_producto)
         {
             using (var conexion = new PROYECTO_PAEntities())

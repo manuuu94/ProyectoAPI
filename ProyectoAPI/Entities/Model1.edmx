@@ -11,7 +11,7 @@
           </Key>
           <Property Name="ID_PROD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="PRECIO" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="PRECIO" Type="decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="CANTIDAD" Type="int" Nullable="false" />
           <Property Name="TOTAL" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="ID_PRODUCTO" Type="int" Nullable="false" />
@@ -105,7 +105,7 @@
           <Property Name="ID_SERVICIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE_SERVICIO" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <Association Name="FK__CARRITO__ID_PROD__4E53A1AA">
+        <Association Name="FK__CARRITO__ID_PROD__41B8C09B">
           <End Role="INVENTARIO_SERVICIOS" Type="Self.INVENTARIO_SERVICIOS" Multiplicity="1" />
           <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -223,7 +223,7 @@
           <EntitySet Name="REGISTROS_INVENTARIO" EntityType="Self.REGISTROS_INVENTARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SERVICIOS" EntityType="Self.SERVICIOS" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CARRITO__ID_PROD__4E53A1AA" Association="Self.FK__CARRITO__ID_PROD__4E53A1AA">
+          <AssociationSet Name="FK__CARRITO__ID_PROD__41B8C09B" Association="Self.FK__CARRITO__ID_PROD__41B8C09B">
             <End Role="INVENTARIO_SERVICIOS" EntitySet="INVENTARIO_SERVICIOS" />
             <End Role="CARRITO" EntitySet="CARRITO" />
           </AssociationSet>
@@ -262,7 +262,7 @@
           </Key>
           <Property Name="ID_PROD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PRECIO" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
           <Property Name="TOTAL" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" />

@@ -12,10 +12,10 @@ namespace ProyectoAPI.Controllers
     public class CarritoController : ApiController
     {
         CarritoModel modelo = new CarritoModel();
-/*
+
         [HttpPost]
         [Route("api/AñadirCarrito")]
-        public string AñadirCarrito(carro carrito)
+        public bool AñadirCarrito(carro carrito)
         {
             try
             {
@@ -23,10 +23,10 @@ namespace ProyectoAPI.Controllers
             }
             catch (Exception)
             {
-                return null;
+                return false;
             }
         }
-*/ 
+
         [HttpGet]
         [Route("api/AñadirCarrito2")]
         public bool AñadirCarrito2(string descripcion, decimal precio, int cantidad, int id_producto)
@@ -40,6 +40,7 @@ namespace ProyectoAPI.Controllers
                 return false;
             }
         }
+
         [HttpGet]
         [Route("api/mostrarCarrito")]
         public List<carro> mostrarCarrito()
