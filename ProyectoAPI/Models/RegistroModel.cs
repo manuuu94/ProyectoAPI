@@ -22,7 +22,7 @@ namespace ProyectoAPI.Models
         {
             if (validaCarrito())
             {
-                if (registros.CEDULA_CLIENTE != null)
+                if (registros.CEDULA_CLIENTE != null && registros.ID_EMPLEADO != 0)
                 {
                     using (var conexion = new PROYECTO_PAEntities())
                     {
@@ -33,6 +33,7 @@ namespace ProyectoAPI.Models
                             var datosclientes = (from x in conexion.CLIENTES_ATENDIDOS
                                                  where x.CEDULA_CLIENTE == registros.CEDULA_CLIENTE
                                                  select x).ToList();
+
                             if (datosclientes.Count == 0 && registros.NOMBRE_CLIENTE != null & registros.CORREO != null
                                     && registros.TELEFONO != null)
                             {
@@ -68,6 +69,7 @@ namespace ProyectoAPI.Models
                                     return "Compra Confirmada - cliente registrado con éxito";
                                 }
                             }
+
                             if (datosclientes.Count > 0)
                             {
                                 var datos = (from x in conexion.CARRITO
@@ -102,6 +104,7 @@ namespace ProyectoAPI.Models
                                     return "Compra Confirmada - cliente existente";
                                 }
                             }
+
                             if (datosclientes.Count == 0 && registros.NOMBRE_CLIENTE == null || registros.CORREO == null
                                 || registros.TELEFONO == null)
                             {
@@ -164,6 +167,7 @@ namespace ProyectoAPI.Models
             }
         }
 
+        //vaciar carrito que no mueve las cantidades del inventario
         public void vaciarCarrito()
         {
             using (var conexion = new PROYECTO_PAEntities())
@@ -213,9 +217,6 @@ namespace ProyectoAPI.Models
 
     }
 }
-
-//hace falta que vacie el carrito despues de confirmar una compra
-//hace falta que valide que el carrito no está vacio si quiere confirmar la compra
 
 /*
 {

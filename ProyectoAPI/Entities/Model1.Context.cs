@@ -36,6 +36,7 @@ namespace ProyectoAPI.Entities
         public virtual DbSet<REGISTROS_INVENTARIO> REGISTROS_INVENTARIO { get; set; }
         public virtual DbSet<ROLES> ROLES { get; set; }
         public virtual DbSet<SERVICIOS> SERVICIOS { get; set; }
+        public virtual DbSet<METODOS_PAGO> METODOS_PAGO { get; set; }
     
         public virtual int añadeEmpleado(string pNOMBRE, string pAPELLIDO1, string pAPELLIDO2, string pUSERNAME, string pPASSWORD, Nullable<System.DateTime> pFECHAINGRESO, string pCORREO, Nullable<int> pIDROL)
         {

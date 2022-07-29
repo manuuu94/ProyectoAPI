@@ -53,6 +53,13 @@
           <Property Name="URL_IMAGE" Type="varchar" MaxLength="100" />
           <Property Name="ID_SERVICIO" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="METODOS_PAGO">
+          <Key>
+            <PropertyRef Name="ID_METODO" />
+          </Key>
+          <Property Name="ID_METODO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="REGISTRO_COMPRAS">
           <Key>
             <PropertyRef Name="ID_COMPRA" />
@@ -64,6 +71,7 @@
           <Property Name="TELEFONO" Type="varchar" MaxLength="100" />
           <Property Name="FECHA" Type="date" />
           <Property Name="TOTAL_COMPRA" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ID_METODO" Type="int" />
           <Property Name="ID_EMPLEADO" Type="int" Nullable="false" />
           <Property Name="NOMBRE_EMPLEADO" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -117,7 +125,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CLIENTES___ID_CO__345EC57D">
+        <Association Name="FK__CLIENTES___ID_CO__4A4E069C">
           <End Role="REGISTRO_COMPRAS" Type="Self.REGISTRO_COMPRAS" Multiplicity="1" />
           <End Role="CLIENTES_ATENDIDOS" Type="Self.CLIENTES_ATENDIDOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -153,7 +161,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__REGISTRO___ID_EM__318258D2">
+        <Association Name="FK__REGISTRO___ID_EM__477199F1">
           <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="1" />
           <End Role="REGISTRO_COMPRAS" Type="Self.REGISTRO_COMPRAS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -162,6 +170,18 @@
             </Principal>
             <Dependent Role="REGISTRO_COMPRAS">
               <PropertyRef Name="ID_EMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REGISTRO___ID_ME__467D75B8">
+          <End Role="METODOS_PAGO" Type="Self.METODOS_PAGO" Multiplicity="0..1" />
+          <End Role="REGISTRO_COMPRAS" Type="Self.REGISTRO_COMPRAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="METODOS_PAGO">
+              <PropertyRef Name="ID_METODO" />
+            </Principal>
+            <Dependent Role="REGISTRO_COMPRAS">
+              <PropertyRef Name="ID_METODO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -218,6 +238,7 @@
           <EntitySet Name="CLIENTES_ATENDIDOS" EntityType="Self.CLIENTES_ATENDIDOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INVENTARIO_SERVICIOS" EntityType="Self.INVENTARIO_SERVICIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="METODOS_PAGO" EntityType="Self.METODOS_PAGO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REGISTRO_COMPRAS" EntityType="Self.REGISTRO_COMPRAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REGISTROS_CARRITO" EntityType="Self.REGISTROS_CARRITO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REGISTROS_INVENTARIO" EntityType="Self.REGISTROS_INVENTARIO" Schema="dbo" store:Type="Tables" />
@@ -227,7 +248,7 @@
             <End Role="INVENTARIO_SERVICIOS" EntitySet="INVENTARIO_SERVICIOS" />
             <End Role="CARRITO" EntitySet="CARRITO" />
           </AssociationSet>
-          <AssociationSet Name="FK__CLIENTES___ID_CO__345EC57D" Association="Self.FK__CLIENTES___ID_CO__345EC57D">
+          <AssociationSet Name="FK__CLIENTES___ID_CO__4A4E069C" Association="Self.FK__CLIENTES___ID_CO__4A4E069C">
             <End Role="REGISTRO_COMPRAS" EntitySet="REGISTRO_COMPRAS" />
             <End Role="CLIENTES_ATENDIDOS" EntitySet="CLIENTES_ATENDIDOS" />
           </AssociationSet>
@@ -239,8 +260,12 @@
             <End Role="SERVICIOS" EntitySet="SERVICIOS" />
             <End Role="INVENTARIO_SERVICIOS" EntitySet="INVENTARIO_SERVICIOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__REGISTRO___ID_EM__318258D2" Association="Self.FK__REGISTRO___ID_EM__318258D2">
+          <AssociationSet Name="FK__REGISTRO___ID_EM__477199F1" Association="Self.FK__REGISTRO___ID_EM__477199F1">
             <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+            <End Role="REGISTRO_COMPRAS" EntitySet="REGISTRO_COMPRAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REGISTRO___ID_ME__467D75B8" Association="Self.FK__REGISTRO___ID_ME__467D75B8">
+            <End Role="METODOS_PAGO" EntitySet="METODOS_PAGO" />
             <End Role="REGISTRO_COMPRAS" EntitySet="REGISTRO_COMPRAS" />
           </AssociationSet>
           <AssociationSet Name="FK__REGISTROS__ID_SE__367C1819" Association="Self.FK__REGISTROS__ID_SE__367C1819">
@@ -325,6 +350,8 @@
           <Property Name="NOMBRE_EMPLEADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CLIENTES_ATENDIDOS" Relationship="Self.FK__CLIENTES___ID_CO__18B6AB08" FromRole="REGISTRO_COMPRAS" ToRole="CLIENTES_ATENDIDOS" />
           <NavigationProperty Name="EMPLEADOS" Relationship="Self.FK__REGISTRO___ID_EM__15DA3E5D" FromRole="REGISTRO_COMPRAS" ToRole="EMPLEADOS" />
+          <Property Name="ID_METODO" Type="Int32" />
+          <NavigationProperty Name="METODOS_PAGO" Relationship="PROYECTO_PAModel.FK__REGISTRO___ID_ME__467D75B8" FromRole="REGISTRO_COMPRAS" ToRole="METODOS_PAGO" />
         </EntityType>
         <EntityType Name="REGISTROS_CARRITO">
           <Key>
@@ -516,6 +543,11 @@
             <Parameter Name="PUSERNAME" Mode="In" Type="String" />
             <Parameter Name="PPASSWORD" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="METODOS_PAGO" EntityType="PROYECTO_PAModel.METODOS_PAGO" />
+          <AssociationSet Name="FK__REGISTRO___ID_ME__467D75B8" Association="PROYECTO_PAModel.FK__REGISTRO___ID_ME__467D75B8">
+            <End Role="METODOS_PAGO" EntitySet="METODOS_PAGO" />
+            <End Role="REGISTRO_COMPRAS" EntitySet="REGISTRO_COMPRAS" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="validarUsuario_Result">
           <Property Type="Int32" Name="ID_EMPLEADO" Nullable="false" />
@@ -527,6 +559,26 @@
           <Property Type="DateTime" Name="FECHA_INGRESO" Nullable="false" />
           <Property Type="Int32" Name="ID_ROL" Nullable="false" />
         </ComplexType>
+        <EntityType Name="METODOS_PAGO">
+          <Key>
+            <PropertyRef Name="ID_METODO" />
+          </Key>
+          <Property Name="ID_METODO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="REGISTRO_COMPRAS" Relationship="PROYECTO_PAModel.FK__REGISTRO___ID_ME__467D75B8" FromRole="METODOS_PAGO" ToRole="REGISTRO_COMPRAS" />
+        </EntityType>
+        <Association Name="FK__REGISTRO___ID_ME__467D75B8">
+          <End Type="PROYECTO_PAModel.METODOS_PAGO" Role="METODOS_PAGO" Multiplicity="0..1" />
+          <End Type="PROYECTO_PAModel.REGISTRO_COMPRAS" Role="REGISTRO_COMPRAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="METODOS_PAGO">
+              <PropertyRef Name="ID_METODO" />
+            </Principal>
+            <Dependent Role="REGISTRO_COMPRAS">
+              <PropertyRef Name="ID_METODO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -588,6 +640,7 @@
           <EntitySetMapping Name="REGISTRO_COMPRAS">
             <EntityTypeMapping TypeName="PROYECTO_PAModel.REGISTRO_COMPRAS">
               <MappingFragment StoreEntitySet="REGISTRO_COMPRAS">
+                <ScalarProperty Name="ID_METODO" ColumnName="ID_METODO" />
                 <ScalarProperty Name="ID_COMPRA" ColumnName="ID_COMPRA" />
                 <ScalarProperty Name="CEDULA_CLIENTE" ColumnName="CEDULA_CLIENTE" />
                 <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
@@ -661,6 +714,14 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="cambiarContraseña" FunctionName="PROYECTO_PAModel.Store.cambiarContraseña" />
+          <EntitySetMapping Name="METODOS_PAGO">
+            <EntityTypeMapping TypeName="PROYECTO_PAModel.METODOS_PAGO">
+              <MappingFragment StoreEntitySet="METODOS_PAGO">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_METODO" ColumnName="ID_METODO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

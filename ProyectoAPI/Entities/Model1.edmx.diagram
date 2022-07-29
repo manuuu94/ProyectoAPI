@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="982826ab019340baaa4618adbc329ee2" Name="Diagram1" ZoomLevel="57">
-        <EntityTypeShape EntityType="PROYECTO_PAModel.CARRITO" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PROYECTO_PAModel.CARRITO" Width="1.5" PointX="5.125" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PROYECTO_PAModel.CLIENTES_ATENDIDOS" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PROYECTO_PAModel.EMPLEADOS" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PROYECTO_PAModel.INVENTARIO_SERVICIOS" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PROYECTO_PAModel.REGISTRO_COMPRAS" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PROYECTO_PAModel.REGISTRO_COMPRAS" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PROYECTO_PAModel.REGISTROS_CARRITO" Width="1.5" PointX="7.375" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PROYECTO_PAModel.REGISTROS_INVENTARIO" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PROYECTO_PAModel.ROLES" Width="1.5" PointX="0.875" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PROYECTO_PAModel.SERVICIOS" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PROYECTO_PAModel.ROLES" Width="1.5" PointX="0.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PROYECTO_PAModel.SERVICIOS" Width="1.5" PointX="0.875" PointY="7.625" IsExpanded="true" />
         <AssociationConnector Association="PROYECTO_PAModel.FK__CARRITO__ID_PROD__4E53A1AA" ManuallyRouted="false" />
         <AssociationConnector Association="PROYECTO_PAModel.FK__CLIENTES___ID_CO__18B6AB08" ManuallyRouted="false" />
         <AssociationConnector Association="PROYECTO_PAModel.FK__EMPLEADOS__ID_RO__11158940" ManuallyRouted="false" />
@@ -21,6 +21,8 @@
         <AssociationConnector Association="PROYECTO_PAModel.FK__INVENTARI__ID_SE__4E88ABD4" ManuallyRouted="false" />
         <AssociationConnector Association="PROYECTO_PAModel.FK__REGISTROS__ID_SE__367C1819" ManuallyRouted="false" />
         <AssociationConnector Association="PROYECTO_PAModel.FK__ROLES__ID_SERVIC__0B5CAFEA" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PROYECTO_PAModel.METODOS_PAGO" Width="1.5" PointX="5.125" PointY="0.5" />
+        <AssociationConnector Association="PROYECTO_PAModel.FK__REGISTRO___ID_ME__467D75B8" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -29,9 +29,11 @@ namespace ProyectoAPI.Entities
         public Nullable<decimal> TOTAL_COMPRA { get; set; }
         public int ID_EMPLEADO { get; set; }
         public string NOMBRE_EMPLEADO { get; set; }
+        public Nullable<int> ID_METODO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENTES_ATENDIDOS> CLIENTES_ATENDIDOS { get; set; }
         public virtual EMPLEADOS EMPLEADOS { get; set; }
+        public virtual METODOS_PAGO METODOS_PAGO { get; set; }
     }
 }
