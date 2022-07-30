@@ -136,7 +136,7 @@ namespace ProyectoAPI.Models
             }
         }
     
-        public List<Registros> ConsultarRegistros()
+        public List<Registros> ConsultarRegistrosCompras()
         {
             using (var conexion = new PROYECTO_PAEntities())
             {
@@ -217,7 +217,36 @@ namespace ProyectoAPI.Models
             }
         }
 
-
+        public List<RegistrosInventario> ConsultarRegistrosInventario()
+        {
+            using (var conexion = new PROYECTO_PAEntities())
+            {
+                try
+                {
+                    var datos = (from x in conexion.REGISTROS_INVENTARIO
+                                 select x).ToList();
+                    List<RegistrosInventario> lista = new List<RegistrosInventario>();
+                    foreach (var dato in datos)
+                    {
+                        lista.Add(new RegistrosInventario
+                        {
+                            ID = dato.ID,
+                            ACCION = dato.ACCION,
+                            DESCRIPCION = dato.DESCRIPCION,
+                            CANTIDAD = (int)dato.CANTIDAD,
+                            FECHA = (DateTime)dato.FECHA,
+                            ID_SERVICIO = (int)dato.ID_SERVICIO,
+                        });
+                    }
+                    return lista;
+                }
+                catch (Exception ex)
+                {
+                    conexion.Dispose();
+                    throw ex;
+                }
+            }
+        }
 
     }
 }

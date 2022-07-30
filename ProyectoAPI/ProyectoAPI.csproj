@@ -201,6 +201,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Entities\RegistrosInventario.cs" />
     <Compile Include="Entities\Registros.cs" />
     <Compile Include="Entities\REGISTROS_CARRITO.cs">
       <DependentUpon>Model1.tt</DependentUpon>

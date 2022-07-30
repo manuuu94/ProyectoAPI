@@ -28,12 +28,27 @@ namespace ProyectoAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/ConsultarRegistros")]
-        public List<Registros> ConsultarRegistros()
+        [Route("api/ConsultarRegistrosCompras")]
+        public List<Registros> ConsultarRegistrosCompras()
         {
             try
             {
-                return modelo.ConsultarRegistros();
+                return modelo.ConsultarRegistrosCompras();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("api/ConsultarRegistrosInventario")]
+        public List<RegistrosInventario> ConsultarRegistrosInventario()
+        {
+            try
+            {
+                return modelo.ConsultarRegistrosInventario();
             }
             catch (Exception)
             {
