@@ -13,5 +13,11 @@ namespace ProyectoAPI.Entities
         public int CANTIDAD_DISPONIBLE { get; set; }
         public string URL_IMAGE { get; set; }
         public int ID_SERVICIO { get; set; }
+
+
+
+
+        //public int ID { get; set; }
+        //public int CANTIDAD { get; set; }
     }
 }
