@@ -8,7 +8,6 @@ namespace ProyectoAPI.Models
 {
     public class RegistroModel
     {
-
         /* Añade un registro de la compra que incluye un ID, Cedula, nombre, correo, teléfono del cliente,
          * la fecha de la compra y el total del carrito.
          * Muestra todos los registros de compras completadas.
