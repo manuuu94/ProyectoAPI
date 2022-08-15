@@ -41,6 +41,21 @@ namespace ProyectoAPI.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("api/CambiarContraseña")]
+        public bool CambiarContraseña(ResPass resPass)
+        {
+            try
+            {
+                return modelo.CambiarContraseña(resPass);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
         [HttpGet]
         [Route("api/ConsultarEmpleados")]
         public List<Empleado> ConsultarEmpleados()
@@ -55,7 +70,22 @@ namespace ProyectoAPI.Controllers
             }
         }
 
-        
+
+        [HttpGet]
+        [Route("api/ConsultarEmpleado")]
+        public Empleado ConsultarEmpleado(int ID_EMPLEADO)
+        {
+            try
+            {
+                return modelo.ConsultarEmpleado(ID_EMPLEADO);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
         [HttpPut]
         [Route("api/ActualizarEmpleado")]
         public bool ActualizarEmpleado(Empleado empleado)
@@ -70,19 +100,35 @@ namespace ProyectoAPI.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("api/CambiarContraseña")]
-        public bool CambiarContraseña(ResPass resPass)
+        [HttpDelete]
+        [Route("api/EliminarEmpleado")]
+        public bool EliminarEmpleado(int ID_EMPLEADO)
         {
             try
             {
-                return modelo.CambiarContraseña(resPass);
+                return modelo.EliminarEmpleado(ID_EMPLEADO);
             }
             catch (Exception)
             {
                 return false;
             }
         }
+
+        [HttpPost]
+        [Route("api/RegistrarEmpleado")]
+        public bool RegistrarEmpleado(Empleado empleado)
+        {
+            try
+            {
+                return modelo.RegistrarEmpleado(empleado);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
 
 
     }
