@@ -247,6 +247,40 @@ namespace ProyectoAPI.Models
             }
         }
 
+        public List<Cliente> ConsultarRegistroClientesAtendidos()
+        {
+            using (var conexion = new PROYECTO_PAEntities())
+            {
+                try
+                {
+                    var datos = (from x in conexion.CLIENTES_ATENDIDOS
+                                 select x).ToList();
+
+                    List<Cliente> lista = new List<Cliente>();
+                    
+                    foreach (var dato in datos)
+                    {
+                        lista.Add(new Cliente
+                        {
+                            ID_CLIENTE = dato.ID_CLIENTE,
+                            CEDULA_CLIENTE = dato.CEDULA_CLIENTE,
+                            NOMBRE_CLIENTE = dato.NOMBRE_CLIENTE,
+                            CORREO = dato.CORREO,
+                            TELEFONO = dato.TELEFONO,
+                            FECHA = (DateTime)dato.FECHA,
+                            ID_COMPRA = (int)dato.ID_COMPRA,
+                        });
+                    }
+                    return lista;
+                }
+                catch (Exception ex)
+                {
+                    conexion.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
     }
 }
 

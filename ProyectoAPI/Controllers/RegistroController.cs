@@ -56,6 +56,19 @@ namespace ProyectoAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/ConsultarRegistroClientesAtendidos")]
+        public List<Cliente> ConsultarRegistroClientesAtendidos()
+        {
+            try
+            {
+                return modelo.ConsultarRegistroClientesAtendidos();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
     }
 }

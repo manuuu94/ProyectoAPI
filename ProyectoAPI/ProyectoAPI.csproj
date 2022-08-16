@@ -171,6 +171,7 @@
     <Compile Include="Entities\CARRITO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\CLIENTES_ATENDIDOS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
