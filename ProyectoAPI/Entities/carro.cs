@@ -15,6 +15,7 @@ namespace ProyectoAPI.Entities
         public int ID_PRODUCTO { get; set; }
 
         public int ID { get; set; }
+        public decimal TOTAL_CARRITO { get; set; }
 
     }
 }

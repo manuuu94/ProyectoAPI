@@ -90,6 +90,7 @@ namespace ProyectoAPI.Models
                 }
             }
         }
+
         public List<carro> mostrarCarrito()
         {
             using (var conexion = new PROYECTO_PAEntities())
@@ -98,9 +99,13 @@ namespace ProyectoAPI.Models
                 {
                     var datos = (from x in conexion.CARRITO
                                  select x).ToList();
+                    decimal TOTAL_COMPRA = 0;
                     List<carro> listacarrito = new List<carro>();
                     foreach (var dato in datos)
                     {
+                        {
+                            TOTAL_COMPRA = TOTAL_COMPRA + dato.TOTAL;
+                        }
                         listacarrito.Add(new carro
                         {
                             ID_PROD = dato.ID_PROD,
@@ -109,6 +114,7 @@ namespace ProyectoAPI.Models
                             CANTIDAD = dato.CANTIDAD,
                             TOTAL = dato.TOTAL,
                             ID_PRODUCTO = dato.ID_PRODUCTO,
+                            TOTAL_CARRITO = TOTAL_COMPRA,
                         });
                     }
                     return listacarrito;
